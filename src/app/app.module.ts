@@ -14,14 +14,14 @@ const ROUTES = [
     redirectTo: 'posts',
     pathMatch: 'full'
   },
-  {
-    path: 'todo-api',
-    component: PostsComponent,
-    pathMatch: 'full'
-  },
+  // {
+  //   path: 'todo-api',
+  //   redirectTo: 'api',
+  //   pathMatch: 'full'
+  // },
   {
     path: 'api/todo-api',
-    redirectTo: 'todo-api',
+    component: PostsComponent,
     pathMatch: 'full'
   },
   {

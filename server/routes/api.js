@@ -25,7 +25,7 @@ const MONGDB = 'http://127.0.0.1:28017';
 
 // GET api listing.
 router.get('/', (req, res) => {
-  res.send('api works');
+  res.send('welcome to the API ');
 });
 
 // Get all posts
@@ -46,11 +46,24 @@ router.get('/todo-api', (req, res) => {
   axios.get(`${MONGDB}/todo-api/todos/`)
     .then(todos => {
       res.status(200).json(todos.data);
-      res.send('todos api works');
+      console.log('todos api works');
     })
     .catch(error => {
       res.status(500).send(error)
-      res.send('todos error api works');
+       console.log('todos error api works');
+    });
+});
+router.get('/meanapp-dev', (req, res) => {
+  // Get posts from the mock api
+  // This should ideally be replaced with a service that connects to MongoDB
+  axios.get(`${MONGDB}/meanapp-dev/things/`)
+    .then(todos => {
+      res.status(200).json(todos.data);
+      console.log('todos 2api works');
+    })
+    .catch(error => {
+      res.status(500).send(error)
+       console.log('todos 2error api works');
     });
 });
 

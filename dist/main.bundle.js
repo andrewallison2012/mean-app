@@ -46,7 +46,7 @@ module.exports = "<h1>\n  {{title}} cool huh not\n</h1>\n<router-outlet></router
 /***/ 152:
 /***/ (function(module, exports) {
 
-module.exports = "{{ todos}}\n<div class=\"container\">\n  <div class=\"row\" *ngFor=\"let post of posts\">\n    <div class=\"card card-block\">\n      <h4 class=\"card-title\">{{ post.title }}</h4>\n      <p class=\"card-text\">{{post.body}}</p>\n      <a href=\"#\" class=\"card-link\">Card link</a>\n      <a href=\"#\" class=\"card-link\">Another link</a>\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <div class=\"row\" *ngFor=\"let post of posts\">\n    <div class=\"card card-block\">\n      <h4 class=\"card-title\">{{ post.title }}</h4>\n      <p class=\"card-text\">{{post.body}}</p>\n      <a href=\"#\" class=\"card-link\">Card link</a>\n      <a href=\"#\" class=\"card-link\">Another link</a>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -90,6 +90,10 @@ var PostsService = (function () {
     };
     PostsService.prototype.getAllTodos = function () {
         return this.http.get('/todo-api/todos/')
+            .map(function (res) { return res.json(); });
+    };
+    PostsService.prototype.getAllTodos2 = function () {
+        return this.http.get('/meanapp-dev/things/')
             .map(function (res) { return res.json(); });
     };
     return PostsService;
@@ -203,14 +207,14 @@ var ROUTES = [
         redirectTo: 'posts',
         pathMatch: 'full'
     },
-    {
-        path: 'todo-api',
-        component: __WEBPACK_IMPORTED_MODULE_6__posts_posts_component__["a" /* PostsComponent */],
-        pathMatch: 'full'
-    },
+    // {
+    //   path: 'todo-api',
+    //   redirectTo: 'api',
+    //   pathMatch: 'full'
+    // },
     {
         path: 'api/todo-api',
-        redirectTo: 'todo-api',
+        component: __WEBPACK_IMPORTED_MODULE_6__posts_posts_component__["a" /* PostsComponent */],
         pathMatch: 'full'
     },
     {

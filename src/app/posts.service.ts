@@ -16,4 +16,8 @@ export class PostsService {
     return this.http.get('/todo-api/todos/')
       .map(res => res.json());
   }
+  getAllTodos2() {
+    return this.http.get('/meanapp-dev/things/')
+      .map(res => res.json());
+  }
 }
