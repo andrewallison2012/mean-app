@@ -12,4 +12,8 @@ export class PostsService {
     return this.http.get('/api/posts')
       .map(res => res.json());
   }
+  getAllTodos() {
+    return this.http.get('/todo-api/todos/')
+      .map(res => res.json());
+  }
 }

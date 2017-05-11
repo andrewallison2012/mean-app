@@ -15,6 +15,16 @@ const ROUTES = [
     pathMatch: 'full'
   },
   {
+    path: 'todo-api',
+    component: PostsComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'api/todo-api',
+    redirectTo: 'todo-api',
+    pathMatch: 'full'
+  },
+  {
     path: 'posts',
     component: PostsComponent
   }

@@ -46,7 +46,7 @@ module.exports = "<h1>\n  {{title}} cool huh not\n</h1>\n<router-outlet></router
 /***/ 152:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\" *ngFor=\"let post of posts\">\n    <div class=\"card card-block\">\n      <h4 class=\"card-title\">{{ post.title }}</h4>\n      <p class=\"card-text\">{{post.body}}</p>\n      <a href=\"#\" class=\"card-link\">Card link</a>\n      <a href=\"#\" class=\"card-link\">Another link</a>\n    </div>\n  </div>\n</div>"
+module.exports = "{{ todos}}\n<div class=\"container\">\n  <div class=\"row\" *ngFor=\"let post of posts\">\n    <div class=\"card card-block\">\n      <h4 class=\"card-title\">{{ post.title }}</h4>\n      <p class=\"card-text\">{{post.body}}</p>\n      <a href=\"#\" class=\"card-link\">Card link</a>\n      <a href=\"#\" class=\"card-link\">Another link</a>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -86,6 +86,10 @@ var PostsService = (function () {
     // Get all posts from the API
     PostsService.prototype.getAllPosts = function () {
         return this.http.get('/api/posts')
+            .map(function (res) { return res.json(); });
+    };
+    PostsService.prototype.getAllTodos = function () {
+        return this.http.get('/todo-api/todos/')
             .map(function (res) { return res.json(); });
     };
     return PostsService;
@@ -200,6 +204,16 @@ var ROUTES = [
         pathMatch: 'full'
     },
     {
+        path: 'todo-api',
+        component: __WEBPACK_IMPORTED_MODULE_6__posts_posts_component__["a" /* PostsComponent */],
+        pathMatch: 'full'
+    },
+    {
+        path: 'api/todo-api',
+        redirectTo: 'todo-api',
+        pathMatch: 'full'
+    },
+    {
         path: 'posts',
         component: __WEBPACK_IMPORTED_MODULE_6__posts_posts_component__["a" /* PostsComponent */]
     }
@@ -253,12 +267,16 @@ var PostsComponent = (function () {
         this.postsService = postsService;
         // instantiate posts to an empty array
         this.posts = [];
+        this.todos = [];
     }
     PostsComponent.prototype.ngOnInit = function () {
         var _this = this;
         // Retrieve posts from the API
         this.postsService.getAllPosts().subscribe(function (posts) {
             _this.posts = posts;
+        });
+        this.postsService.getAllTodos().subscribe(function (todos) {
+            _this.todos = todos;
         });
     };
     return PostsComponent;

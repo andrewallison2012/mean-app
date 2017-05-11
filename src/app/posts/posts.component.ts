@@ -9,6 +9,7 @@ import { PostsService } from '../posts.service';
 export class PostsComponent implements OnInit {
   // instantiate posts to an empty array
   posts: any = [];
+  todos: any = [];
 
   constructor(private postsService: PostsService) { }
 
@@ -16,6 +17,9 @@ export class PostsComponent implements OnInit {
     // Retrieve posts from the API
     this.postsService.getAllPosts().subscribe(posts => {
       this.posts = posts;
+    });
+    this.postsService.getAllTodos().subscribe(todos => {
+      this.todos = todos;
     });
   }
 }
